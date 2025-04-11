@@ -9,4 +9,5 @@ This is a simple circuit for programming the **AT28C64 EEPROM** using an **Ardui
 # What's here?
 
 # 1. Basic progammer
-The code in the [code/eeprom-programmer.ino](code/eeprom-programmer.ino) a simple EEPROM programmer. It writes a few bytes into the EEPROM and then reads its contents.
+The code in the [code/eeprom-programmer.ino]([https://github.com/your-username/your-repo-name/blob/main/code/eeprom-programmer.ino](https://github.com/OmerMaruani/Board-Design-PCB/blob/main/code/eeprom-progammer.ino))
+ a simple EEPROM programmer. It writes a few bytes into the EEPROM and then reads its contents.
