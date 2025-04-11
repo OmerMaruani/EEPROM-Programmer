@@ -6,3 +6,7 @@ This is a simple circuit for programming the **AT28C64 EEPROM** using an **Ardui
 
 <img src="schematic/schematic.png" style="max-width:100%; height:auto;" />
 
+# What's here?
+
+# 1. Basic progammer
+The code in the /eeprom-programmer directory is a simple EEPROM programmer. It writes a few bytes into the EEPROM and then reads (or "dumps") its contents.
