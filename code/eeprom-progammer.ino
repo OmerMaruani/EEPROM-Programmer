@@ -30,16 +30,29 @@ void setup() {
   digitalWrite(outputEnable,HIGH);
   pinMode(outputEnable,OUTPUT);
 
-  writeEEPROM();
-  delay(3000);
-  readEEPROM(0x00);
- 
+  delay(1000);
 
-  //writeEEPROMNeg();
-  delay(3000);
-  //readEEPROM(1024);
+  // Write EEPROM
+  for( int i =0 ; i< sizeof(IOPins) / sizeof(IOPins[0]); i++) pinMode(IOPins[i],OUTPUT);
+  for(int i = 0; i < 8; i++)
+    {
+      setAddress(i,false);
+      writeData(numbers[i]);
+      setWritePrint(i,numbers[i]);
+    }
 
-  testEEPROM();
+  // Read EEPROM
+  for( int i =0 ; i< sizeof(IOPins) / sizeof(IOPins[0]); i++) pinMode(IOPins[i],INPUT);
+  byte data=0;
+  for(int i = 0; i < 8; i++)
+    {
+        setAddress(i,true);
+        data = readData();
+        setReadPrint(i,data);
+    }
+
+
+  
 }
 
 
@@ -92,282 +105,5 @@ void writeData(byte data)
   delayMicroseconds(1);
   digitalWrite(writeEnablePin,HIGH);
   delay(5);
-
-}
-
-
-void readEEPROM(int startingAddress)
-{
-
-  //digitalWrite(outputEnable,LOW);
-  //digitalWrite(writeEnablePin,HIGH);
-  for( int i =0 ; i< sizeof(IOPins) / sizeof(IOPins[0]); i++) pinMode(IOPins[i],INPUT);
-
-  byte data=0;
-  int address=startingAddress;
-  for(int i = address; i < address + 256 ;i++)
-  {
-    setAddress(i,true);
-    data = readData();
-    setReadPrint(i,data);
-    //delay(10);
-  }
-
-  Serial.println(" ");
-  Serial.println("Finish reading 00 section");
-
-  address += 256;
-  for(int i = address; i < address + 256 ;i++)
-  {
-    setAddress(i,true);
-    data = readData();
-    setReadPrint(i,data);
-   //delay(10);
-  }
-
-  Serial.println(" ");
-  Serial.println("Finish reading 01 section");
-
-
-  address += 256;
-  for(int i = address; i < address + 256 ;i++)
-  {
-    setAddress(i,true);
-    data = readData();
-    setReadPrint(i,data);
-    //delay(10);
-  }
-
-  Serial.println(" ");
-  Serial.println("Finish reading 10 section");
-
-
-  address += 256;
-  for(int i = address; i < address + 256 ;i++)
-  {
-    setAddress(i,true);
-    data = readData();
-    setReadPrint(i,data);
-    //delay(10);
-  }
-
-  Serial.println(" ");
-  Serial.println("Finish reading 11 section");
-
-
-}
-
-void writeEEPROM()
-{
-  
-  ///digitalWrite(outputEnable,HIGH); 
-  for( int i =0 ; i< sizeof(IOPins) / sizeof(IOPins[0]); i++) pinMode(IOPins[i],OUTPUT);
-
-  int address=0;
-  for(int i = 0; i < 256 ; i++)
-  {
-    setAddress(address + i,false);
-    writeData( numbers[i % 10]);
-    setWritePrint(address+i,numbers[i % 10]);
-  
-  }
-
-  Serial.println();
-  Serial.println("finish writing 00 section");
-
-
-
-  address += 256;
-  for(int i = 0; i < 256 ; i++)
-  {
-    setAddress(address + i,false);
-    writeData( numbers[ (i/10) % 10]);
-    setWritePrint(address+i,numbers[(i/10) % 10]);    
-    
-  }
-
-  Serial.println();
-  Serial.println("finish writing 01 section");
-
-  
-
-  address += 256;
-  for(int i = 0; i < 256 ; i++)
-  {
-    setAddress(address + i,false);
-    writeData(numbers[(i/100) % 10]);
-    setWritePrint(address+i,numbers[(i/100) % 10]);       
-    
-  }
-
-  Serial.println();
-  Serial.println("finish writing 10 section");
-
-  
-  address += 256;
-  for(int i = 0; i < 256 ; i++)
-  {
-    setAddress(address + i,false);
-    writeData(0x00);
-    setWritePrint(address+i,0x00);       
-    
-  }
-
-  Serial.println();
-  Serial.println("finish writing 11 section");
-
-
-  Serial.println();
-  Serial.println("finish writing");
-
-}
-
-void setWritePrint(int address,byte data)
-{
-
-  if ( address % 10 == 0) 
-  {
-    Serial.println();
-    if(address < 16) Serial.print("0");
-    Serial.print(address,HEX);
-    Serial.print(": ");
-  } 
-
-  if(data < 16) Serial.print("0");
-  Serial.print(data,HEX);
-  Serial.print(" ");
-
-}
-
-void setReadPrint(int address ,byte data)
-{
-   if ( address % 10 == 0) 
-    {
-      Serial.println();
-      if(address < 16) Serial.print("0");
-      Serial.print(address,HEX);
-      Serial.print(": ");
-    } 
-
-    if(data<16) Serial.print("0");
-    Serial.print(data,HEX);
-    Serial.print(" ");
-
-}
-
-void writeEEPROMNeg()
-{
-  delay(1000);
-  int address=1024;
-  
-
-  for(int i = 0 ; i < 128 ; i++)
-  {
-    setAddress(address + i,false);
-    writeData( numbers[i % 10]);
-    setWritePrint(address+i,numbers[i % 10]);    
-    delay(10);
-  }
-
-  address += 128;
-
-  for(int i = 0 ; i < 128 ; i++)
-  {
-    setAddress(address + i,false);
-    writeData( numbers[ (128-i) % 10]);
-    setWritePrint(address+i,numbers[(128-i) % 10]);    
-    delay(10);
-  }
-
-  Serial.println();
-  Serial.println("finish writing 00 section");
-
-
-
-  address += 128;
-  for(int i = 0; i < 128 ; i++)
-  {
-    setAddress(address + i,false);
-    writeData( numbers[ (i/10) % 10]);
-    setWritePrint(address+i,numbers[(i/10) % 10]);    
-    delay(10);
-  }
-
-
-  address += 128;
-  for(int i = 0; i < 128 ; i++)
-  {
-    setAddress(address + i,false);
-    writeData( numbers[ ( (128-i) /10) % 10]);
-    setWritePrint(address+i,numbers[( (128-i) /10) % 10]);    
-    delay(10);
-  }
-
-  Serial.println();
-  Serial.println("finish writing 01 section");
-
-
-  
-  address += 128;
-  for(int i = 0; i < 128 ; i++)
-  {
-    setAddress(address + i,false);
-    writeData(numbers[(i/100) % 10]);
-    setWritePrint(address+i,numbers[(i/100) % 10]);       
-    delay(10);
-  }
-
-
-  address += 128;
-  for(int i = 0; i < 128 ; i++)
-  {
-    setAddress(address + i,false);
-    writeData(numbers[((128-i)/100) % 10]);
-    setWritePrint(address+i,numbers[((128-i)/100) % 10]);       
-    delay(10);
-  }
-
-  Serial.println();
-  Serial.println("finish writing 10 section");
-
-
-
-  address += 128;
-  for(int i = 0; i < 128 ; i++)
-  {
-    setAddress(address + i,false);
-    writeData(0x00);
-    setWritePrint(0x00,address+i);       
-    delay(10);
-  }
-
-
-  address += 128;
-  for(int i = 0; i < 128 ; i++)
-  {
-    setAddress(address + i,false);
-    writeData(0x40);
-    setWritePrint(0x40,address+i);       
-    delay(10);
-  }
-
-
-  Serial.println();
-  Serial.println("finish writing 11 section");
-
-
-  Serial.println();
-  Serial.println("finish writing");
-
-}
-
-void testEEPROM()
-{
-  for(int i =0 ; i < 256; i++)
-  {
-    setAddress(address + i,false);
-    Serial.println(i);
-    delay(300);
-  }
 
 }
