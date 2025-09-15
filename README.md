@@ -87,24 +87,6 @@ You can modify the sketch to:
 
 ---
 
-## 🚀 Getting Started
-
-1. Clone or download this repository
-2. Wire the components as shown in the schematic or breadboard photo
-3. Open `code/eeprom-programmer.ino` in Arduino IDE
-4. Upload the code to your Arduino Nano
-5. Open the Serial Monitor (`Ctrl+Shift+M`) to view the results
-
----
-
-## 📌 Notes
-
-- EEPROM write cycle is slow (~10ms per byte), so avoid writing large blocks rapidly
-- Make sure address and data lines settle before toggling WE
-- Shift registers output address bits in correct order (MSB to LSB)
-
----
-
 ## 📎 License
 
 This project is open-source under the **MIT License**.  
@@ -122,5 +104,5 @@ Feel free to modify, use, and share with attribution.
 
 ## 🙌 Credits
 
-Created by [Your Name]  
+Created by Omer Maruani  
 Feel free to contribute or fork!
