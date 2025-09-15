@@ -67,7 +67,7 @@ void setAddress(int address, bool outputEnable)
 {
   digitalWrite(latchPin, LOW);
   shiftOut(dataPin, clockPin, LSBFIRST, lowByte(address));
-  shiftOut(dataPin, clockPin, LSBFIRST, highByte(address) | (outputEnable ? 0x00 : ( 1 << 5))  );
+  shiftOut(dataPin, clockPin, LSBFIRST, highByte(address) | (outputEnable ? 0x00 : ( 1 << 3))  );
   digitalWrite(latchPin, HIGH);
   //delay(10);
 }
