@@ -49,6 +49,7 @@ The Arduino sketch is located at:
 
 📁 [`code/eeprom-programmer.ino`](code/eeprom-programmer.ino)
 
+
 ### 📝 What it does:
 - Sets up shift registers for addressing
 - Writes test bytes to selected EEPROM addresses
