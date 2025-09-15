@@ -92,5 +92,6 @@ Feel free to modify, use, and share with attribution.
 
 ## 🙌 Credits
 
-Created by Omer Maruani  
+Created by Omer Maruani
+This project was inspired by Ben Eater’s work on 8-bit computing and EEPROM programming
 Feel free to contribute or fork!
