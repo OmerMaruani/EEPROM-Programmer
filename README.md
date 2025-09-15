@@ -1,14 +1,126 @@
-# EEPROMProgammer
+# 🧠 AT28C64 EEPROM Programmer using Arduino Nano
 
+This project demonstrates a simple and low-cost way to program an **AT28C64 parallel EEPROM** using an **Arduino Nano** and two **74HC595 shift registers**. It writes and reads data from the EEPROM, showing the results in the Arduino Serial Monitor.
 
+Because the Arduino Nano doesn’t have enough I/O pins to directly control all address and data lines, this design uses shift registers to expand its output capabilities.
 
-# Circuit
-This is a simple circuit for programming the **AT28C64 EEPROM** using an **Arduino Nano**. Since the Arduino doesn't have enough pins to directly control all the data and address pins of the EEPROM, this design utilizes two **74HC595** serial-in parallel-out shift register chips to cummunicate with the EEPROM.
+---
 
-<img src="schematic/schematic.png" style="max-width:100%; height:auto;" />
+## 📦 What's Included
 
-# What's here?
+- ✅ Real breadboard setup photo
+- ✅ Serial Monitor output (write + read verification)
+- ✅ Circuit schematic for easy wiring
+- ✅ Arduino sketch for programming the EEPROM
 
-# 1. Basic progammer
-The code in the [code/eeprom-progammer.ino](https://github.com/OmerMaruani/Board-Design-PCB/blob/main/code/eeprom-progammer.ino)
-is a simple EEPROM programmer. It writes a few bytes into the EEPROM and then reads its contents.
+---
+
+## 🧱 1. Breadboard Setup
+
+This is the actual physical circuit built on a breadboard. The Arduino Nano communicates with the EEPROM through two 74HC595 shift registers that handle the address lines.
+
+![Breadboard Setup](images/breadboard-photo.jpg)
+
+> 💡 *Connect WE, OE, and CE control pins properly, and ensure pull-up/down resistors if needed.*
+
+---
+
+## 🧪 2. Serial Monitor Output
+
+When the Arduino sketch is uploaded, it writes specific values to the EEPROM and reads them back to verify correct operation.
+
+Example Serial Monitor output:
+
+Writing 0x55 to address 0x0000
+Reading from address 0x0000: 0x55
+Success!
+
+yaml
+Copy code
+
+![Serial Monitor](images/serial-monitor.png)
+
+> 🔎 *This confirms the programmer successfully wrote and read data.*
+
+---
+
+## 📐 3. Schematic
+
+This schematic shows all connections between the Arduino Nano, the 74HC595 shift registers, and the AT28C64 EEPROM.
+
+![EEPROM Schematic](schematic/eeprom-schematic.png)
+
+You can also view the full-size version here:  
+📄 [`schematic/eeprom-schematic.pdf`](schematic/eeprom-schematic.pdf)
+
+---
+
+## 💻 4. Arduino Code
+
+The Arduino sketch is located at:
+
+📁 [`code/eeprom-programmer.ino`](code/eeprom-programmer.ino)
+
+### 📝 What it does:
+- Sets up shift registers for addressing
+- Writes test bytes to selected EEPROM addresses
+- Reads back the data
+- Verifies correctness in the Serial Monitor
+
+You can modify the sketch to:
+- Write more data
+- Read full memory blocks
+- Test specific EEPROM addresses
+
+---
+
+## 🧰 Parts List
+
+| Component        | Quantity |
+|------------------|----------|
+| AT28C64 EEPROM   | 1        |
+| Arduino Nano     | 1        |
+| 74HC595          | 2        |
+| Breadboard       | 1        |
+| Jumper wires     | ~20      |
+| Decoupling capacitors (0.1uF) | Optional (recommended) |
+
+---
+
+## 🚀 Getting Started
+
+1. Clone or download this repository
+2. Wire the components as shown in the schematic or breadboard photo
+3. Open `code/eeprom-programmer.ino` in Arduino IDE
+4. Upload the code to your Arduino Nano
+5. Open the Serial Monitor (`Ctrl+Shift+M`) to view the results
+
+---
+
+## 📌 Notes
+
+- EEPROM write cycle is slow (~10ms per byte), so avoid writing large blocks rapidly
+- Make sure address and data lines settle before toggling WE
+- Shift registers output address bits in correct order (MSB to LSB)
+
+---
+
+## 📎 License
+
+This project is open-source under the **MIT License**.  
+Feel free to modify, use, and share with attribution.
+
+---
+
+## ✨ Future Improvements
+
+- [ ] Add GUI-based serial control (Python or Processing)
+- [ ] Read/write full EEPROM
+- [ ] Support for other EEPROMs (e.g. 28C256)
+
+---
+
+## 🙌 Credits
+
+Created by [Your Name]  
+Feel free to contribute or fork!
