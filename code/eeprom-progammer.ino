@@ -33,7 +33,7 @@ void setup() {
   // Write EEPROM
   for( int i =0 ; i< sizeof(IOPins) / sizeof(IOPins[0]); i++) pinMode(IOPins[i],OUTPUT);
   Serial.println("Writing few bytes...");
-  for(int i = 0; i < 64; i++)
+  for(int i = 0; i < 8; i++)
     {
       setAddress(i,false);
       writeData(i);
@@ -50,7 +50,7 @@ void setup() {
   Serial.println();
   Serial.println("Reading few bytes...");
   byte data=0;
-  for(int i = 0; i < 64; i++)
+  for(int i = 0; i < 8; i++)
     {
       setAddress(i,true);
       data = readData();
