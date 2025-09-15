@@ -29,15 +29,6 @@ This is the actual physical circuit built on a breadboard. The Arduino Nano comm
 
 When the Arduino sketch is uploaded, it writes specific values to the EEPROM and reads them back to verify correct operation.
 
-Example Serial Monitor output:
-
-Writing 0x55 to address 0x0000
-Reading from address 0x0000: 0x55
-Success!
-
-yaml
-Copy code
-
 ![Serial Monitor](images/serial-monitor.png)
 
 > 🔎 *This confirms the programmer successfully wrote and read data.*
@@ -49,9 +40,6 @@ Copy code
 This schematic shows all connections between the Arduino Nano, the 74HC595 shift registers, and the AT28C64 EEPROM.
 
 ![EEPROM Schematic](schematic/eeprom-schematic.png)
-
-You can also view the full-size version here:  
-📄 [`schematic/eeprom-schematic.pdf`](schematic/eeprom-schematic.pdf)
 
 ---
 
