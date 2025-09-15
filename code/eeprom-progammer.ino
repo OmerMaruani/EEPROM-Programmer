@@ -27,28 +27,34 @@ void setup() {
   digitalWrite(writeEnablePin,HIGH);
   pinMode(writeEnablePin,OUTPUT);
 
-  digitalWrite(outputEnable,HIGH);
-  pinMode(outputEnable,OUTPUT);
 
   delay(1000);
 
   // Write EEPROM
   for( int i =0 ; i< sizeof(IOPins) / sizeof(IOPins[0]); i++) pinMode(IOPins[i],OUTPUT);
+  Serial.println("Writing few bytes...");
   for(int i = 0; i < 8; i++)
     {
       setAddress(i,false);
       writeData(numbers[i]);
-      setWritePrint(i,numbers[i]);
+
+      Serial.print(numbers[i]);
+      Serial.print(" ");
+
     }
 
   // Read EEPROM
   for( int i =0 ; i< sizeof(IOPins) / sizeof(IOPins[0]); i++) pinMode(IOPins[i],INPUT);
+  Serial.println("Reading few bytes...");
   byte data=0;
   for(int i = 0; i < 8; i++)
     {
         setAddress(i,true);
         data = readData();
-        setReadPrint(i,data);
+
+        Serial.print(data);
+        Serial.print(" ");
+
     }
 
 
