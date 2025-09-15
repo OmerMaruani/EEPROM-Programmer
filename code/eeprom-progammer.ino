@@ -33,27 +33,32 @@ void setup() {
   // Write EEPROM
   for( int i =0 ; i< sizeof(IOPins) / sizeof(IOPins[0]); i++) pinMode(IOPins[i],OUTPUT);
   Serial.println("Writing few bytes...");
-  for(int i = 0; i < 8; i++)
+  for(int i = 0; i < 64; i++)
     {
       setAddress(i,false);
-      writeData(numbers[i]);
+      writeData(i);
 
-      Serial.print(numbers[i]);
+
+      // Debug print
+      Serial.print(i,HEX);
       Serial.print(" ");
 
     }
 
   // Read EEPROM
   for( int i =0 ; i< sizeof(IOPins) / sizeof(IOPins[0]); i++) pinMode(IOPins[i],INPUT);
+  Serial.println();
   Serial.println("Reading few bytes...");
   byte data=0;
-  for(int i = 0; i < 8; i++)
+  for(int i = 0; i < 64; i++)
     {
-        setAddress(i,true);
-        data = readData();
+      setAddress(i,true);
+      data = readData();
 
-        Serial.print(data);
-        Serial.print(" ");
+
+      // Debug print
+      Serial.print(data,HEX);
+      Serial.print(" "); 
 
     }
 
@@ -73,7 +78,8 @@ void setAddress(int address, bool outputEnable)
 {
   digitalWrite(latchPin, LOW);
   shiftOut(dataPin, clockPin, LSBFIRST, lowByte(address));
-  shiftOut(dataPin, clockPin, LSBFIRST, highByte(address) | (outputEnable ? 0x00 : ( 1 << 3))  );
+  shiftOut(dataPin, clockPin, LSBFIRST, highByte(address) | (outputEnable ? 0x00 : ( 1 << 5))  );
+  
   digitalWrite(latchPin, HIGH);
   //delay(10);
 }
