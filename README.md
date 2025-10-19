@@ -19,7 +19,7 @@ Because the Arduino Nano doesn’t have enough I/O pins to directly control all 
 
 This is the actual physical circuit built on a breadboard. The Arduino Nano communicates with the EEPROM through two 74HC595 shift registers that handle the address lines.
 
-![Breadboard Setup](images/breadboard-photo.jpg)
+![Breadboard Setup](images/BreadboardPhoto.jpg)
 
 > 💡 *Connect WE, OE, and CE control pins properly, and ensure pull-up/down resistors if needed.*
 
@@ -29,7 +29,7 @@ This is the actual physical circuit built on a breadboard. The Arduino Nano comm
 
 When the Arduino sketch is uploaded, it writes specific values to the EEPROM and reads them back to verify correct operation.
 
-![Serial Monitor](images/serial-monitor.png)
+![Serial Monitor](images/SerialMonitor.png)
 
 > 🔎 *This confirms the programmer successfully wrote and read data.*
 
@@ -39,7 +39,7 @@ When the Arduino sketch is uploaded, it writes specific values to the EEPROM and
 
 This schematic shows all connections between the Arduino Nano, the 74HC595 shift registers, and the AT28C64 EEPROM.
 
-![EEPROM Schematic](schematic/eeprom-schematic.png)
+![EEPROM Schematic](schematics/Schematic.png)
 
 ---
 
@@ -47,7 +47,7 @@ This schematic shows all connections between the Arduino Nano, the 74HC595 shift
 
 The Arduino sketch is located at:
 
-📁 [`code/eeprom-programmer.ino`](code/eeprom-programmer.ino)
+📁 [`code/eeprom-programmer.ino`](code/EEPROMProgrammer.ino)
 
 
 ### 📝 What it does:
