@@ -39,7 +39,7 @@ When the Arduino sketch is uploaded, it writes specific values to the EEPROM and
 
 This schematic shows all connections between the Arduino Nano, the 74HC595 shift registers, and the AT28C64 EEPROM.
 
-![EEPROM Schematic](schematics/Schematic.png)
+![EEPROM Schematic](schematic/Schematic.png)
 
 ---
 
